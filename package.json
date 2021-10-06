@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Grant Yi",
+    "email": "imgrantyi@gmail.com"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A modification of OGL to allow for use in Nuxt",
+  "license": "Unlicense",
+  "main": "src/index.mjs",
+  "name": "ogl-nuxt",
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "htmlWhitespaceSensitivity": "css",
+    "printWidth": 150,
+    "quoteProps": "as-needed",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:grantyi/ogl-nuxt.git"
+  },
+  "sideEffects": false,
+  "version": "0.0.1"
+}

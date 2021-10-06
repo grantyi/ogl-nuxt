@@ -1,80 +1,80 @@
 import * as EulerFunc from './functions/EulerFunc.js';
 import { Mat4 } from './Mat4.js';
+import {ArrayProxy} from './ArrayProxy'
 
 const tmpMat4 = new Mat4();
 
-export class Euler {
+export class Euler extends ArrayProxy{
     constructor(x = 0, y = x, z = x, order = 'YXZ') {
-        this.data = [x, y, z];
+        super(x,y,z);
         this.order = order;
-        this.onChange = () => {};
-        return this;
+        return this.proxy;
     }
 
     get x() {
-        return this.data[0];
+        return this.proxy[0];
     }
 
     get y() {
-        return this.data[1];
+        return this.proxy[1];
     }
 
     get z() {
-        return this.data[2];
+        return this.proxy[2];
     }
 
     set x(v) {
-        this.data[0] = v;
+        this.proxy[0] = v;
         this.onChange();
     }
 
     set y(v) {
-        this.data[1] = v;
+        this.proxy[1] = v;
         this.onChange();
     }
 
     set z(v) {
-        this.data[2] = v;
+        this.proxy[2] = v;
         this.onChange();
     }
 
     set(x, y = x, z = x) {
-        if (x.length) return this.copy(x);
-        this.data[0] = x;
-        this.data[1] = y;
-        this.data[2] = z;
+        if (x.length) return this.proxy.copy(x);
+        this.proxy[0] = x;
+        this.proxy[1] = y;
+        this.proxy[2] = z;
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     copy(v) {
-        this.data[0] = v[0];
-        this.data[1] = v[1];
-        this.data[2] = v[2];
+        this.proxy[0] = v[0];
+        this.proxy[1] = v[1];
+        this.proxy[2] = v[2];
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     reorder(order) {
         this.order = order;
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     fromRotationMatrix(m, order = this.order) {
-        EulerFunc.fromRotationMatrix(this.data, m, order);
-        return this;
+        EulerFunc.fromRotationMatrix(this.proxy, m, order);
+        return this.proxy;
     }
 
     fromQuaternion(q, order = this.order) {
         tmpMat4.fromQuaternion(q);
-        return this.fromRotationMatrix(tmpMat4, order);
+        return this.proxy.fromRotationMatrix(tmpMat4, order);
     }
 
     toArray(a = [], o = 0) {
-        a[o] = this.data[0];
-        a[o + 1] = this.data[1];
-        a[o + 2] = this.data[2];
+        a[o] = this.proxy[0];
+        a[o + 1] = this.proxy[1];
+        a[o + 2] = this.proxy[2];
         return a;
     }
 }

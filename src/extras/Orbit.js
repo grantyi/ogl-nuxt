@@ -138,6 +138,7 @@ export function Orbit(
     }
 
     const pan = (deltaX, deltaY) => {
+        console.log(deltaX)
         let el = element === document ? document.body : element;
         tempVec3.copy(object.position).sub(this.target);
         let targetDistance = tempVec3.distance();

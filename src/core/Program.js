@@ -198,7 +198,7 @@ export class Program {
                 return setUniform(this.gl, activeUniform.type, location, textureUnits);
             }
 
-            setUniform(this.gl, activeUniform.type, location, uniform.value);
+            setUniform(this.gl, activeUniform.type, location, uniform.value.data || uniform.value);
         });
 
         this.applyState();
