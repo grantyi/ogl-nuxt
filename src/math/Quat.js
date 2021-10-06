@@ -1,151 +1,115 @@
+import { ArrayProxy } from './ArrayProxy';
 import * as QuatFunc from './functions/QuatFunc.js';
 
-export class Quat {
+export class Quat extends ArrayProxy {
     constructor(x = 0, y = 0, z = 0, w = 1) {
-        this.data = [x, y, z, w];
-        this.onChange = () => {};
-        return this;
-    }
-
-    get x() {
-        return this.data[0];
-    }
-
-    get y() {
-        return this.data[1];
-    }
-
-    get z() {
-        return this.data[2];
-    }
-
-    get w() {
-        return this.data[3];
-    }
-
-    set x(v) {
-        this.data[0] = v;
-        this.onChange();
-    }
-
-    set y(v) {
-        this.data[1] = v;
-        this.onChange();
-    }
-
-    set z(v) {
-        this.data[2] = v;
-        this.onChange();
-    }
-
-    set w(v) {
-        this.data[3] = v;
-        this.onChange();
+        super(x,y,z,w)
+        return this.proxy;
     }
 
     identity() {
-        QuatFunc.identity(this.data);
+        QuatFunc.identity(this.proxy);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     set(x, y, z, w) {
-        if (x.length) return this.copy(x);
-        QuatFunc.set(this.data, x, y, z, w);
+        if (x.length) return this.proxy.copy(x);
+        QuatFunc.set(this.proxy, x, y, z, w);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     rotateX(a) {
-        QuatFunc.rotateX(this.data, this.data, a);
+        QuatFunc.rotateX(this.proxy, this.proxy, a);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     rotateY(a) {
-        QuatFunc.rotateY(this.data, this.data, a);
+        QuatFunc.rotateY(this.proxy, this.proxy, a);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     rotateZ(a) {
-        QuatFunc.rotateZ(this.data, this.data, a);
+        QuatFunc.rotateZ(this.proxy, this.proxy, a);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     inverse(q = this) {
-        QuatFunc.invert(this.data, q);
+        QuatFunc.invert(this.proxy, q);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     conjugate(q = this) {
-        QuatFunc.conjugate(this.data, q);
+        QuatFunc.conjugate(this.proxy, q);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     copy(q) {
-        QuatFunc.copy(this.data, q);
+        QuatFunc.copy(this.proxy, q);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     normalize(q = this) {
-        QuatFunc.normalize(this.data, q);
+        QuatFunc.normalize(this.proxy, q);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     multiply(qA, qB) {
         if (qB) {
-            QuatFunc.multiply(this.data, qA, qB);
+            QuatFunc.multiply(this.proxy, qA, qB);
         } else {
-            QuatFunc.multiply(this.data, this.data, qA);
+            QuatFunc.multiply(this.proxy, this.proxy, qA);
         }
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     dot(v) {
-        return QuatFunc.dot(this.data, v);
+        return QuatFunc.dot(this.proxy, v);
     }
 
     fromMatrix3(matrix3) {
-        QuatFunc.fromMat3(this.data, matrix3);
+        QuatFunc.fromMat3(this.proxy, matrix3);
         this.onChange();
-        return this;
+        return this.proxy;
     }
 
     fromEuler(euler) {
-        QuatFunc.fromEuler(this.data, euler, euler.order);
-        return this;
+        QuatFunc.fromEuler(this.proxy, euler, euler.order);
+        return this.proxy;
     }
 
     fromAxisAngle(axis, a) {
-        QuatFunc.setAxisAngle(this.data, axis, a);
-        return this;
+        QuatFunc.setAxisAngle(this.proxy, axis, a);
+        return this.proxy;
     }
 
     slerp(q, t) {
-        QuatFunc.slerp(this.data, this.data, q, t);
-        return this;
+        QuatFunc.slerp(this.proxy, this.proxy, q, t);
+        return this.proxy;
     }
 
     fromArray(a, o = 0) {
-        this.data[0] = a[o];
-        this.data[1] = a[o + 1];
-        this.data[2] = a[o + 2];
-        this.data[3] = a[o + 3];
-        return this;
+        this.proxy[0] = a[o];
+        this.proxy[1] = a[o + 1];
+        this.proxy[2] = a[o + 2];
+        this.proxy[3] = a[o + 3];
+        return this.proxy;
     }
 
     toArray(a = [], o = 0) {
-        a[o] = this.data[0];
-        a[o + 1] = this.data[1];
-        a[o + 2] = this.data[2];
-        a[o + 3] = this.data[3];
+        a[o] = this.proxy[0];
+        a[o + 1] = this.proxy[1];
+        a[o + 2] = this.proxy[2];
+        a[o + 3] = this.proxy[3];
         return a;
     }
 }

@@ -1,73 +1,49 @@
 import * as Vec3Func from './functions/Vec3Func.js';
+import {ArrayProxy} from './ArrayProxy'
 
-export class Vec3 {
+export class Vec3 extends ArrayProxy{
     constructor(x = 0, y = x, z = x) {
-        this.data = [x, y, z];
-        return this;
+        return super(x,y,z)
     }
-
-    get x() {
-        return this[0];
-    }
-
-    get y() {
-        return this[1];
-    }
-
-    get z() {
-        return this[2];
-    }
-
-    set x(v) {
-        this[0] = v;
-    }
-
-    set y(v) {
-        this[1] = v;
-    }
-
-    set z(v) {
-        this[2] = v;
-    }
-
+    
     set(x, y = x, z = x) {
-        if (x.length) return this.copy(x);
-        Vec3Func.set(this, x, y, z);
-        return this;
+        if (x.length) return this.proxy.copy(x);
+        Vec3Func.set(this.data, x, y, z);
+        return this.proxy;
     }
 
     copy(v) {
-        Vec3Func.copy(this, v);
-        return this;
+        Vec3Func.copy(this.proxy, v);
+        return this.proxy;
     }
 
     add(va, vb) {
-        if (vb) Vec3Func.add(this, va, vb);
-        else Vec3Func.add(this, this, va);
-        return this;
+        if (vb) Vec3Func.add(this.proxy, va, vb);
+        else Vec3Func.add(this.proxy, this.proxy, va);
+        return this.proxy;
     }
 
     sub(va, vb) {
-        if (vb) Vec3Func.subtract(this, va, vb);
-        else Vec3Func.subtract(this, this, va);
-        return this;
+        if (vb) Vec3Func.subtract(this.proxy, va, vb);
+        else Vec3Func.subtract(this.proxy, this.proxy, va);
+        return this.proxy;
     }
 
     multiply(v) {
-        if (v.length) Vec3Func.multiply(this, this, v);
-        else Vec3Func.scale(this, this, v);
-        return this;
+        if (v.length) Vec3Func.multiply(this.proxy, this.proxy, v);
+        else Vec3Func.scale(this.proxy, this.proxy, v);
+        return this.proxy;
     }
 
     divide(v) {
-        if (v.length) Vec3Func.divide(this, this, v);
-        else Vec3Func.scale(this, this, 1 / v);
-        return this;
+        if (v.length) Vec3Func.divide(this.proxy, this.proxy, v);
+        else Vec3Func.scale(this.proxy, this.proxy, 1 / v);
+        return this.proxy;
     }
 
     inverse(v = this) {
-        Vec3Func.inverse(this, v);
-        return this;
+        Vec3Func.inverse(this.proxy, v);
+        return this.proxy;
     }
 
     // Can't use 'length' as Array.prototype uses it
@@ -76,7 +52,7 @@ export class Vec3 {
     }
 
     distance(v) {
-        if (v) return Vec3Func.distance(this, v);
+        if (v) return Vec3Func.distance(this.proxy, v);
         else return Vec3Func.length(this);
     }
 
@@ -85,61 +61,61 @@ export class Vec3 {
     }
 
     squaredDistance(v) {
-        if (v) return Vec3Func.squaredDistance(this, v);
+        if (v) return Vec3Func.squaredDistance(this.proxy, v);
         else return Vec3Func.squaredLength(this);
     }
 
     negate(v = this) {
-        Vec3Func.negate(this, v);
-        return this;
+        Vec3Func.negate(this.proxy, v);
+        return this.proxy;
     }
 
     cross(va, vb) {
-        if (vb) Vec3Func.cross(this, va, vb);
-        else Vec3Func.cross(this, this, va);
-        return this;
+        if (vb) Vec3Func.cross(this.proxy, va, vb);
+        else Vec3Func.cross(this.proxy, this.proxy, va);
+        return this.proxy;
     }
 
     scale(v) {
-        Vec3Func.scale(this, this, v);
-        return this;
+        Vec3Func.scale(this.proxy, this.proxy, v);
+        return this.proxy;
     }
 
     normalize() {
-        Vec3Func.normalize(this, this);
-        return this;
+        Vec3Func.normalize(this.proxy, this);
+        return this.proxy;
     }
 
     dot(v) {
-        return Vec3Func.dot(this, v);
+        return Vec3Func.dot(this.proxy, v);
     }
 
     equals(v) {
-        return Vec3Func.exactEquals(this, v);
+        return Vec3Func.exactEquals(this.proxy, v);
     }
 
     applyMatrix4(mat4) {
-        Vec3Func.transformMat4(this, this, mat4);
-        return this;
+        Vec3Func.transformMat4(this.proxy, this.proxy, mat4);
+        return this.proxy;
     }
 
     scaleRotateMatrix4(mat4) {
-        Vec3Func.scaleRotateMat4(this, this, mat4);
-        return this;
+        Vec3Func.scaleRotateMat4(this.proxy, this.proxy, mat4);
+        return this.proxy;
     }
 
     applyQuaternion(q) {
-        Vec3Func.transformQuat(this, this, q);
-        return this;
+        Vec3Func.transformQuat(this.proxy, this.proxy, q);
+        return this.proxy;
     }
 
     angle(v) {
-        return Vec3Func.angle(this, v);
+        return Vec3Func.angle(this.proxy, v);
     }
 
     lerp(v, t) {
-        Vec3Func.lerp(this, this, v, t);
-        return this;
+        Vec3Func.lerp(this.proxy, this.proxy, v, t);
+        return this.proxy;
     }
 
     clone() {
@@ -150,7 +126,7 @@ export class Vec3 {
         this[0] = a[o];
         this[1] = a[o + 1];
         this[2] = a[o + 2];
-        return this;
+        return this.proxy;
     }
 
     toArray(a = [], o = 0) {

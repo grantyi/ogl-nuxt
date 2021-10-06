@@ -17,6 +17,7 @@ export function fromMat4(out, a) {
     out[6] = a[8];
     out[7] = a[9];
     out[8] = a[10];
+    console.log(out)
     return out;
 }
 

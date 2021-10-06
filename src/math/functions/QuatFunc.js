@@ -92,6 +92,7 @@ export function rotateX(out, a, rad) {
  * @returns {quat} out
  */
 export function rotateY(out, a, rad) {
+    console.log(out)
     rad *= 0.5;
 
     let ax = a[0],

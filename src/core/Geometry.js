@@ -236,7 +236,6 @@ export class Geometry {
             const x = array[i];
             const y = array[i + 1];
             const z = array[i + 2];
-
             min.x = Math.min(x, min.x);
             min.y = Math.min(y, min.y);
             min.z = Math.min(z, min.z);
