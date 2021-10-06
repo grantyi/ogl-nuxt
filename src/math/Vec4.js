@@ -6,38 +6,6 @@ export class Vec4 extends ArrayProxy {
         return super(x,y,z,w)
     }
 
-    get x() {
-        return this.proxy[0];
-    }
-
-    get y() {
-        return this.proxy[1];
-    }
-
-    get z() {
-        return this.proxy[2];
-    }
-
-    get w() {
-        return this.proxy[3];
-    }
-
-    set x(v) {
-        this.proxy[0] = v;
-    }
-
-    set y(v) {
-        this.proxy[1] = v;
-    }
-
-    set z(v) {
-        this.proxy[2] = v;
-    }
-
-    set w(v) {
-        this.proxy[3] = v;
-    }
-
     set(x, y, z, w) {
         if (x.length) return this.proxy.copy(x);
         Vec4Func.set(this.proxy, x, y, z, w);

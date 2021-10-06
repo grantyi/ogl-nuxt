@@ -6,22 +6,6 @@ export class Vec2 extends ArrayProxy{
         return super(x,y)
     }
 
-    get x() {
-        return this.proxy[0];
-    }
-
-    get y() {
-        return this.proxy[1];
-    }
-
-    set x(v) {
-        this.proxy[0] = v;
-    }
-
-    set y(v) {
-        this.proxy[1] = v;
-    }
-
     set(x, y = x) {
         if (x.length) return this.copy(x);
         Vec2Func.set(this.proxy, x, y);

@@ -5,31 +5,7 @@ export class Vec3 extends ArrayProxy{
     constructor(x = 0, y = x, z = x) {
         return super(x,y,z)
     }
-
-    get x() {
-        return this.proxy[0];
-    }
-
-    get y() {
-        return this.proxy[1];
-    }
-
-    get z() {
-        return this.proxy[2];
-    }
-
-    set x(v) {
-        this.proxy[0] = v;
-    }
-
-    set y(v) {
-        this.proxy[1] = v;
-    }
-
-    set z(v) {
-        this.proxy[2] = v;
-    }
-
+    
     set(x, y = x, z = x) {
         if (x.length) return this.proxy.copy(x);
         Vec3Func.set(this.data, x, y, z);

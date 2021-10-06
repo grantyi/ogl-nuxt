@@ -22,38 +22,6 @@ export class Mat4 extends ArrayProxy{
         return super(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
     }
 
-    get x() {
-        return this.proxy[12];
-    }
-
-    get y() {
-        return this.proxy[13];
-    }
-
-    get z() {
-        return this.proxy[14];
-    }
-
-    get w() {
-        return this.proxy[15];
-    }
-
-    set x(v) {
-        this.proxy[12] = v;
-    }
-
-    set y(v) {
-        this.proxy[13] = v;
-    }
-
-    set z(v) {
-        this.proxy[14] = v;
-    }
-
-    set w(v) {
-        this.proxy[15] = v;
-    }
-
     set(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
         if (m00.length) return this.proxy.copy(m00);
         Mat4Func.set(this.proxy, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);

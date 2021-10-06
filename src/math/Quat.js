@@ -4,44 +4,7 @@ import * as QuatFunc from './functions/QuatFunc.js';
 export class Quat extends ArrayProxy {
     constructor(x = 0, y = 0, z = 0, w = 1) {
         super(x,y,z,w)
-        this.onChange = () => {};
         return this.proxy;
-    }
-
-    get x() {
-        return this.proxy[0];
-    }
-
-    get y() {
-        return this.proxy[1];
-    }
-
-    get z() {
-        return this.proxy[2];
-    }
-
-    get w() {
-        return this.proxy[3];
-    }
-
-    set x(v) {
-        this.proxy[0] = v;
-        this.onChange();
-    }
-
-    set y(v) {
-        this.proxy[1] = v;
-        this.onChange();
-    }
-
-    set z(v) {
-        this.proxy[2] = v;
-        this.onChange();
-    }
-
-    set w(v) {
-        this.proxy[3] = v;
-        this.onChange();
     }
 
     identity() {
